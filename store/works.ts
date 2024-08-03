@@ -42,11 +42,13 @@ export const useWorksStore = defineStore('works', {
         },
         async getTicketsByUser(user?: number) {
             const { $api } = useNuxtApp();
-            const ticketsResponse = await $api<ITicket[]>(
-                `/tickets/?applicant__in=${user}&status__in=approved`
-            );
-            this.approvedTicket = ticketsResponse[0];
-            return ticketsResponse;
+            if (user) {
+                const ticketsResponse = await $api<ITicket[]>(
+                    `/tickets/?applicant__in=${user}&status__in=approved`
+                );
+                this.approvedTicket = ticketsResponse[0];
+                return ticketsResponse;
+            }
         },
         async addPoint(work: number, data: { user_id: number }) {
             const { $api } = useNuxtApp();
