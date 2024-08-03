@@ -8,5 +8,6 @@ export default defineNuxtPlugin(async () => {
     const authStore = useAuthStore();
     const workStore = useWorksStore();
     await authStore.me();
-    await workStore.getTicketsByUser(authStore.user?.id);
+    if (authStore.isAuthenticated)
+        await workStore.getTicketsByUser(authStore.user?.id);
 });
