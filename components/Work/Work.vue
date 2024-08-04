@@ -31,10 +31,29 @@
         </div>
         <div
             v-if="openCompanyModal"
+            v-motion
             class="modalUsers"
+            :initial="{
+                opacity: 0,
+            }"
+            :enter="{
+                opacity: 1,
+            }"
             @click.stop.prevent="openCompanyModal = false"
         >
-            <div class="content" @click.stop.prevent="">
+            <div
+                v-motion
+                class="content"
+                :initial="{
+                    opacity: 0,
+                    y: 70,
+                }"
+                :enter="{
+                    opacity: 1,
+                    y: 0,
+                }"
+                @click.stop.prevent=""
+            >
                 <div v-for="ticket in tickets" :key="ticket.id">
                     <User :user="ticket.applicant" :ticket="ticket"></User>
                 </div>
